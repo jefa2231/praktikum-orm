@@ -1,0 +1,131 @@
+### Uji API Praktikum ORM (ekstensi VS Code "REST Client": klik "Send Request")
+### Jalankan dulu: php artisan migrate:fresh --seed && php artisan serve
+
+@base = http://127.0.0.1:8000/api/v1
+
+### 1. Daftar jenis surat -> 200
+GET {{base}}/jenis-surat
+Accept: application/json
+
+### 2. Daftar mahasiswa + jumlah surat -> 200
+GET {{base}}/mahasiswa?q=andi
+Accept: application/json
+
+### 3. Tambah mahasiswa -> 201 (id = 23)
+POST {{base}}/mahasiswa
+Accept: application/json
+Content-Type: application/json
+
+{"nim": "2301050", "nama": "Rina Wulandari", "prodi": "Sistem Informasi", "angkatan": 2023}
+
+### 4. Validasi gagal -> 422
+POST {{base}}/mahasiswa
+Accept: application/json
+Content-Type: application/json
+
+{"nim": "2201001", "nama": "", "angkatan": 1990}
+
+### 5. Ubah sebagian data -> 200
+PATCH {{base}}/mahasiswa/23
+Accept: application/json
+Content-Type: application/json
+
+{"prodi": "Teknik Informatika"}
+
+### 6. Detail mahasiswa + surat + jenis surat (eager loading) -> 200
+GET {{base}}/mahasiswa/1
+Accept: application/json
+
+### 7. Ajukan surat (transaksi: surat + riwayat) -> 201
+POST {{base}}/surat
+Accept: application/json
+Content-Type: application/json
+
+{"mahasiswa_id": 23, "jenis_surat_id": 3, "keperluan": "Penelitian skripsi di Diskominfo."}
+
+### 8. Ajukan surat, mahasiswa tidak ada -> 422
+POST {{base}}/surat
+Accept: application/json
+Content-Type: application/json
+
+{"mahasiswa_id": 999, "jenis_surat_id": 3, "keperluan": "x"}
+
+### 9. Ubah status -> 200 (2 riwayat)
+PATCH {{base}}/surat/23/status
+Accept: application/json
+Content-Type: application/json
+
+{"status": "diproses", "catatan": "Verifikasi BAAK"}
+
+### 10. Aturan bisnis menolak (Selesai -> Diproses) -> 422
+PATCH {{base}}/surat/1/status
+Accept: application/json
+Content-Type: application/json
+
+{"status": "diproses"}
+
+### 11. Filter surat per status + paginasi -> 200
+GET {{base}}/surat?status=diproses&per_page=2
+Accept: application/json
+
+### 12. Hapus mahasiswa (surat ikut terhapus / cascade) -> 204
+DELETE {{base}}/mahasiswa/23
+Accept: application/json
+
+### 13. Surat milik mahasiswa yang dihapus -> 404
+GET {{base}}/surat/23
+Accept: application/json
+
+### 14. Mahasiswa tidak ada -> 404
+GET {{base}}/mahasiswa/999
+Accept: application/json
+
+### Latihan 1a. Hapus jenis surat yang masih dipakai -> 409
+DELETE {{base}}/jenis-surat/1
+Accept: application/json
+
+### Latihan 1b. Tambah jenis surat -> 201
+POST {{base}}/jenis-surat
+Accept: application/json
+Content-Type: application/json
+
+{"kode": "LMB", "nama": "Surat Keterangan Lembur"}
+
+### Latihan 1c. Ubah jenis surat -> 200
+PATCH {{base}}/jenis-surat/5
+Accept: application/json
+Content-Type: application/json
+
+{"nama": "Surat Keterangan Lembur Akademik"}
+
+### Latihan 1d. Hapus jenis surat yang tidak dipakai -> 204
+DELETE {{base}}/jenis-surat/5
+Accept: application/json
+
+### Latihan 2. Statistik surat -> 200
+GET {{base}}/statistik
+Accept: application/json
+
+### Latihan 3. Detail surat memuat dosen penyetuju -> 200
+GET {{base}}/surat/1
+Accept: application/json
+
+### Latihan 4a. Soft delete surat -> 204
+DELETE {{base}}/surat/1
+Accept: application/json
+
+### Latihan 4b. Surat terhapus tidak tampil -> 404
+GET {{base}}/surat/1
+Accept: application/json
+
+### Latihan 4c. Daftar surat terhapus -> 200
+GET {{base}}/surat/terhapus
+Accept: application/json
+
+### Latihan 4d. Pulihkan surat -> 200
+POST {{base}}/surat/1/restore
+Accept: application/json
+
+### Latihan 4e. Surat kembali tampil -> 200
+GET {{base}}/surat/1
+Accept: application/json
