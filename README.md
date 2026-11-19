@@ -16,7 +16,7 @@ CRUD lewat ORM, relasi one-to-many, eager loading, transaksi, REST API, dan lati
 ## Menjalankan
 
 ```bash
-git clone <url-repo> praktikum-orm
+git clone https://github.com/jefa2231/praktikum-orm.git
 cd praktikum-orm
 composer install
 cp .env.example .env          # Windows: copy .env.example .env
