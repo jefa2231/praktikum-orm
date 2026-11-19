@@ -1,12 +1,12 @@
 # Laporan Praktikum — Database Integration & ORM
 
-**Mata kuliah:** IF T5251P Pemrograman Berbasis Kerangka Kerja
-**Pertemuan:** 9 — Database Integration & ORM
-**CPL:** CPL10 — solusi berbasis computing multi-platform
-**CPMK:** CPMK101 [C3] — integrasi database dan ORM pada sisi server
+**Mata kuliah:** IF T5251P Pemrograman Berbasis Kerangka Kerja  
+**Pertemuan:** 9 — Database Integration & ORM  
+**CPL:** CPL10 — solusi berbasis computing multi-platform  
+**CPMK:** CPMK101 [C3] — integrasi database dan ORM pada sisi server  
 **Indikator:** CRUD ke database menggunakan ORM framework
 
-| | |
+| Keterangan | Isi |
 | --- | --- |
 | Nama | Jefanya Efandchris |
 | NIM | .................................. |

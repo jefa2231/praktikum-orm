@@ -114,4 +114,5 @@ Sepuluh skenario API pada modul menghasilkan status code sesuai harapan:
 Latihan mandiri: `409` saat hapus jenis surat terpakai, `201/200/204` CRUD jenis surat,
 `200` statistik, `200` detail surat dengan dosen, `204/404/200/200/200` alur soft delete–restore.
 
-Laporan lengkap (checkpoint, jawaban pertanyaan, tabel pengujian): [`laporan/LAPORAN.md`](laporan/LAPORAN.md).
+Laporan lengkap: [`laporan/LAPORAN.md`](laporan/LAPORAN.md) — versi PDF siap kumpul:
+[`laporan/LAPORAN-PRAKTIKUM-ORM.pdf`](laporan/LAPORAN-PRAKTIKUM-ORM.pdf).
