@@ -136,6 +136,10 @@ SQLSTATE[23000]: Integrity constraint violation: 19 FOREIGN KEY constraint faile
 `id` yang dikirim lewat `create()` diabaikan karena tidak ada di `$fillable`. Penghapusan
 `jenis_surat` yang masih dipakai ditolak database (foreign key `restrictOnDelete`).
 
+![Output terminal Checkpoint 5](img/checkpoint-5.png)
+
+*Gambar 1. Output Tinker untuk CRUD, mass assignment, dan foreign key (PHP 8.5.12 / Laravel 13.43.0 / SQLite).*
+
 ### Checkpoint 6 — relasi & N+1
 
 ```text
@@ -147,6 +151,10 @@ dengan with() = 2 query
 23 = 1 query mengambil semua surat + 22 query mengambil mahasiswa satu per satu di dalam loop.
 Dengan `with('mahasiswa')`, Eloquent menjalankan 2 query: satu untuk surat, satu
 `select * from mahasiswa where id in (...)`.
+
+![Output terminal Checkpoint 6](img/checkpoint-6.png)
+
+*Gambar 2. Relasi dan perbandingan jumlah query sebelum/sesudah eager loading.*
 
 ### Checkpoint 7 — transaksi
 
@@ -196,6 +204,10 @@ Contoh respons nomor 10:
 {"message":"Status Selesai tidak bisa diubah ke Diproses.",
  "errors":{"status":["Status Selesai tidak bisa diubah ke Diproses."]}}
 ```
+
+![Output terminal Checkpoint 8](img/checkpoint-8.png)
+
+*Gambar 3. Rekap status code seluruh skenario uji API dan latihan mandiri.*
 
 ## 4. Latihan mandiri
 
