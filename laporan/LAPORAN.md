@@ -9,7 +9,7 @@
 | Keterangan | Isi |
 | --- | --- |
 | Nama | Jefanya Efandchris |
-| NIM | .................................. |
+| NIM | 2443047 |
 | Repositori | https://github.com/jefa2231/praktikum-orm |
 | Tanggal | 19 November 2026 |
 
@@ -60,6 +60,10 @@ $ php artisan db:show
  Tables ................................ 15
 ```
 
+![Output terminal Checkpoint 1](img/checkpoint-1.png)
+
+*Gambar 1. Koneksi SQLite dan daftar tabel.*
+
 ### Checkpoint 2 — migration
 
 ```text
@@ -76,6 +80,10 @@ $ php artisan migrate:status
  2026_11_19_000007_add_deleted_at_to_surat_table ..... [1] Ran
  2026_11_19_042022_create_personal_access_tokens_table [1] Ran
 ```
+
+![Output terminal Checkpoint 2](img/checkpoint-2.png)
+
+*Gambar 2. Semua migration berstatus Ran.*
 
 ### Checkpoint 3 — model & relasi
 
@@ -102,6 +110,10 @@ dosen = 1
 ```
 
 Sesuai modul: 4 jenis surat, 22 mahasiswa (2 contoh + 20 factory), 22 surat.
+
+![Output terminal Checkpoint 4](img/checkpoint-4.png)
+
+*Gambar 3. Jumlah data hasil seeder.*
 
 ### Checkpoint 5 — CRUD lewat Tinker
 
@@ -138,7 +150,7 @@ SQLSTATE[23000]: Integrity constraint violation: 19 FOREIGN KEY constraint faile
 
 ![Output terminal Checkpoint 5](img/checkpoint-5.png)
 
-*Gambar 1. Output Tinker untuk CRUD, mass assignment, dan foreign key (PHP 8.5.12 / Laravel 13.43.0 / SQLite).*
+*Gambar 4. Output Tinker untuk CRUD, mass assignment, dan foreign key (PHP 8.5.12 / Laravel 13.43.0 / SQLite).*
 
 ### Checkpoint 6 — relasi & N+1
 
@@ -154,7 +166,7 @@ Dengan `with('mahasiswa')`, Eloquent menjalankan 2 query: satu untuk surat, satu
 
 ![Output terminal Checkpoint 6](img/checkpoint-6.png)
 
-*Gambar 2. Relasi dan perbandingan jumlah query sebelum/sesudah eager loading.*
+*Gambar 5. Relasi dan perbandingan jumlah query sebelum/sesudah eager loading.*
 
 ### Checkpoint 7 — transaksi
 
@@ -168,6 +180,10 @@ DomainException: Status Diproses tidak bisa diubah ke Diajukan.
 
 Jumlah surat tidak berubah setelah transaksi gagal, membuktikan rollback. `Surat::ajukan()`
 menyimpan surat + nomor + riwayat dalam satu transaksi.
+
+![Output terminal Checkpoint 7](img/checkpoint-7.png)
+
+*Gambar 6. Rollback transaksi dan aturan transisi status.*
 
 ### Checkpoint 8 — REST API
 
@@ -207,7 +223,7 @@ Contoh respons nomor 10:
 
 ![Output terminal Checkpoint 8](img/checkpoint-8.png)
 
-*Gambar 3. Rekap status code seluruh skenario uji API dan latihan mandiri.*
+*Gambar 7. Rekap status code seluruh skenario uji API dan latihan mandiri.*
 
 ## 4. Latihan mandiri
 
@@ -297,7 +313,13 @@ riwayatnya.
 | Laporan | 10% | Dokumen ini, bukti output tiap checkpoint, 4 jawaban |
 | Nilai tambah | +10 | Soft delete, daftar terhapus, restore |
 
-## 7. Cara menguji ulang
+## 7. Lampiran — uji otomatis
+
+![Hasil uji otomatis 26 cek](img/lampiran-cek.png)
+
+*Gambar 8. Hasil `php cek.php`: 26 cek ORM lolos, 0 gagal.*
+
+## 8. Cara menguji ulang
 
 ```bash
 php artisan migrate:fresh --seed
